@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>File API</title>
+</head>
+<body>
+
+	<form id="myFile">
+		<input type="file" name="archivo">
+		<input type="submit" value="Enviar">
+	</form>
+
+	<form id="myFiles">
+		<input type="file" multiple name="archivos">
+		<input type="submit" value="Enviar">
+	</form>
+	<output id="thumb"></output>
+
+	<script type="text/javascript">
+		document.getElementById('myFile').addEventListener('submit', function(e){
+			e.preventDefault();
+			var archivo = this.archivo.files[0];
+
+			var reader = new FileReader();
+			reader.onload = function(){
+				document.body.style.backgroundImage = 'url('+this.result+')';
+			};
+			reader.readAsDataURL(archivo);
+		});
+
+		document.getElementById('myFiles').addEventListener('submit', function(e){
+			e.preventDefault();
+			var archivos = this.archivos.files;
+			for (var i=0; i<archivos.length; i++){
+				var file = archivos[i];
+
+				var reader = new FileReader();
+				reader.onload = function(){
+					var img = document.createElement('img');
+					img.width = 300;
+					img.src = this.result;
+					document.getElementById('thumb').appendChild(img);
+				};
+				reader.readAsDataURL(file);
+			}
+		});
+
+		function enterover(e){
+			e.stopPropagation();
+			e.preventDefault();
+		}
+		document.addEventListener('dragenter', enterover);
+		document.addEventListener('dragover', enterover);
+		document.addEventListener('drop', function(e){
+			enterover(e);
+
+			var archivos = e.dataTransfer.files;
+			for (var i=0; i<archivos.length; i++){
+				var file = archivos[i];
+
+				var reader = new FileReader();
+				reader.onload = function(){
+					var img = document.createElement('img');
+					img.width = 300;
+					img.src = this.result;
+					document.getElementById('thumb').appendChild(img);
+				};
+				reader.readAsDataURL(file);
+			}
+		});
+	</script>
+</body>
+</html>

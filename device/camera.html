@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>Camara</title>
+</head>
+<body>
+
+	<video id="camera" controls></video>
+
+	<script type="text/javascript">
+		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+		navigator.getUserMedia({video:true}, function(stream){
+			var camera = document.getElementById('camera');
+			camera.src = URL.createObjectURL(stream);
+			camera.play();
+		}, function(){});
+	</script>
+</body>
+</html>

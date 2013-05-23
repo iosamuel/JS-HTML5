@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>XmlHttpRequest 2</title>
+</head>
+<body>
+
+	<output></output>
+
+	<script type="text/javascript">
+		function enterover(e){
+			e.preventDefault();
+			e.stopPropagation();
+		}
+		document.addEventListener('dragenter', enterover);
+		document.addEventListener('dragover', enterover);
+		document.addEventListener('drop', function(e){
+			enterover(e);
+
+			var fd = new FormData();
+			fd.append('imagen', e.dataTransfer.files[0]);
+
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', '/xhr', true);
+			xhr.responseType = 'text';
+
+			xhr.onload = function(){
+				if (this.status == 200){
+					document.querySelector('output').innerHTML = this.response;
+				}
+			};
+			xhr.send(fd);
+		});
+	</script>
+</body>
+</html>

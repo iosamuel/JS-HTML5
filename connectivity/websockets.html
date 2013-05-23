@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>WebSockets</title>
+</head>
+<body>
+	
+	<form id="myForm">
+		<input type="text" name="texto" placeholder="Mensaje...">
+	</form>
+	<output></output>
+
+	<script type="text/javascript">
+		var ws = new WebSocket('ws://echo.websocket.org');
+
+		ws.addEventListener('message', function(e){
+			document.querySelector('output').innerHTML += '<p>'+e.data+'</p>';
+		});
+
+		document.getElementById('myForm').addEventListener('submit', function(e){
+			e.preventDefault();
+			ws.send(this.texto.value);
+		});
+	</script>
+</body>
+</html>

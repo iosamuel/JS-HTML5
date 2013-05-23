@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>Canvas Camara</title>
+</head>
+<body>
+
+	<video id="camera"></video>
+	<button id="tomar">Tomar!</button>
+	<canvas id="video" width="640" height="480"></canvas>
+	<button id="terminar">Terminar!</button>
+
+	<script type="text/javascript">
+		var camera = document.getElementById('camera');
+		var tomar = document.getElementById('tomar');
+		var terminar = document.getElementById('terminar');
+		var canvas = document.getElementById('video');
+		var ctx = canvas.getContext('2d');
+
+		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+		navigator.getUserMedia({video:true}, function(stream){
+			camera.src = URL.createObjectURL(stream);
+			camera.play();
+		}, function(){});
+
+		function getMousePosition(canvas, e){
+			var rect = canvas.getBoundingClientRect();
+			return {
+				x: e.x - rect.left,
+				y: e.y - rect.top
+			}
+		}
+
+		tomar.addEventListener('click', function(){
+			ctx.drawImage(camera, 0, 0, canvas.width, canvas.height);
+		});
+		terminar.addEventListener('click', function(){
+			var data = canvas.toDataURL('image/png');
+			window.open(data);
+		});
+
+		ctx.beginPath();
+		ctx.strokeStyle = 'red';
+		ctx.lineWidth = 10;
+		canvas.addEventListener('mousedown', function(e){
+			e.preventDefault();
+			var pos = getMousePosition(canvas, e);
+			ctx.moveTo(pos.x, pos.y);
+		});
+		canvas.addEventListener('mouseup', function(e){
+			var pos = getMousePosition(canvas, e);
+			ctx.lineTo(pos.x, pos.y);
+			ctx.stroke();
+		});
+	</script>
+</body>
+</html>

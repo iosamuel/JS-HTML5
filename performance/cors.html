@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>CORS</title>
+</head>
+<body>
+
+	<button id="myBtn">Click!</button>
+	<output></output>
+
+	<script type="text/javascript">
+		document.getElementById('myBtn').addEventListener('click', function(e){
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', 'http://localhost:8080/', true);
+			xhr.responseType = 'text';
+
+			xhr.onload = function(){
+				if (this.status == 200){
+					document.querySelector('output').innerHTML = this.response;
+				}
+			};
+			xhr.send();
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>Geolocalización</title>
+</head>
+<body>
+
+	<output></output>
+	
+	<script type="text/javascript">
+		navigator.geolocation.getCurrentPosition(function(pos){
+			var latlon = pos.coords.latitude+","+pos.coords.longitude;
+			var url = 'http://maps.googleapis.com/maps/api/staticmap?center='
++latlon+'&zoom=14&size=600x500&markers=color:red|label:A|'+latlon+'&sensor=false';
+			document.querySelector('output').innerHTML = '<img src="'+url+'">';
+		});
+		// https://developers.google.com/maps/documentation/staticmaps/?hl=es
+	</script>
+</body>
+</html>

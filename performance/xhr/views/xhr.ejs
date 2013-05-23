@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>XmlHttpRequest 2</title>
+</head>
+<body>
+
+	<form id="myForm">
+		<input type="text" name="nombre">
+		<input type="file" name="imagen">
+	</form>
+	<output></output>
+
+	<script type="text/javascript">
+		document.getElementById('myForm').addEventListener('submit', function(e){
+			e.preventDefault();
+
+			var fd = new FormData(this);
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', '/xhr', true);
+			xhr.responseType = 'text';
+
+			xhr.onload = function(){
+				if (this.status == 200){
+					document.querySelector('output').innerHTML = this.response;
+				}
+			};
+			xhr.send(fd);
+		});
+	</script>
+</body>
+</html>

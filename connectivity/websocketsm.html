@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>WebSockets</title>
+</head>
+<body>
+	
+	<form id="myForm">
+		<input type="text" name="texto" placeholder="Mensaje...">
+	</form>
+	<output></output>
+
+	<script type="text/javascript" src="http://localhost:5000/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+		var socket = io.connect('http://localhost:5000');
+
+		socket.on('message', function(data){
+			document.querySelector('output').innerHTML += '<p>'+data+'</p>';
+		});
+
+		document.getElementById('myForm').addEventListener('submit', function(e){
+			e.preventDefault();
+			socket.send(this.texto.value);
+		});
+	</script>
+</body>
+</html>

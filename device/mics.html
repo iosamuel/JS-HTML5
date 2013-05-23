@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>Microfonos</title>
+</head>
+<body>
+
+	<audio id="mics" controls></audio>
+
+	<script type="text/javascript">
+		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+		navigator.getUserMedia({audio:true}, function(stream){
+			var mics = document.getElementById('mics');
+			mics.src = URL.createObjectURL(stream);
+			mics.play();
+		}, function(){});
+	</script>
+</body>
+</html>

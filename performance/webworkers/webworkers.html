@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>WebWorkers</title>
+</head>
+<body>
+
+	<span id="res"></span>
+	<button id="myBtn">Click!</button>
+
+	<script type="text/javascript">
+		var w = new Worker('worker.js');
+		w.addEventListener('message', function(e){
+			document.getElementById('res').innerHTML = e.data;
+		});
+
+		document.getElementById('myBtn').addEventListener('click', function(){
+			console.log('Hola Mundo!');
+		});
+	</script>
+</body>
+</html>

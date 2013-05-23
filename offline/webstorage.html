@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>WebStorage</title>
+</head>
+<body>
+	
+	<select id="color">
+		<option value="blue">Azul</option>
+		<option value="red">Rojo</option>
+		<option value="yellow">Amarillo</option>
+	</select>
+
+	<input type="text" id="nombre" placeholder="Tu nombre...">
+
+	<script type="text/javascript">
+		// removeItem
+		document.body.style.backgroundColor = localStorage.getItem('color');
+		document.getElementById('color').addEventListener('change', function(){
+			document.body.style.backgroundColor = this.value;
+			localStorage.setItem('color', this.value);
+		});
+
+		document.getElementById('nombre').value = sessionStorage.getItem('nombre');
+		document.getElementById('nombre').addEventListener('change', function(){
+			sessionStorage.setItem('nombre', this.value);
+		});
+	</script>
+</body>
+</html>

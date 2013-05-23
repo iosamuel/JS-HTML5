@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>Canvas Tablero</title>
+</head>
+<body>
+	
+	<canvas id="canvas" width="640" height="480" style="border:1px solid #000"></canvas>
+	<input id="color" type="text" value="red" placeholder="Color...">
+	<input id="width" type="number" value="20" placeholder="Ancho...">
+
+	<script type="text/javascript">
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+		var color = document.getElementById('color');
+		var width = document.getElementById('width');
+
+		function getMousePosition(canvas, e){
+			var rect = canvas.getBoundingClientRect();
+			return {
+				x: e.x - rect.left,
+				y: e.y - rect.top
+			}
+		}
+
+		ctx.beginPath();
+		ctx.strokeStyle = color.value; // fill
+		ctx.lineWidth = width.value;
+
+		color.addEventListener('change', function(){
+			ctx.beginPath();
+			ctx.strokeStyle=this.value;
+		});
+		width.addEventListener('change', function(){
+			ctx.beginPath();
+			ctx.lineWidth=this.value;
+		});
+		canvas.addEventListener('mousedown', function(e){
+			e.preventDefault();
+			var pos = getMousePosition(canvas, e);
+			ctx.moveTo(pos.x, pos.y);
+		});
+		canvas.addEventListener('mouseup', function(e){
+			var pos = getMousePosition(canvas, e);
+			ctx.lineTo(pos.x, pos.y);
+			ctx.stroke();
+		});
+	</script>
+</body>
+</html>
