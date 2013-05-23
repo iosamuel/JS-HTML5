@@ -19,8 +19,8 @@
 		function getMousePosition(canvas, e){
 			var rect = canvas.getBoundingClientRect();
 			return {
-				x: e.x - rect.left,
-				y: e.y - rect.top
+				x: e.clientX - rect.left,
+				y: e.clientY - rect.top
 			}
 		}
 
