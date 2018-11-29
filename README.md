@@ -1,11 +1,11 @@
-# JavaScript y HTML5 en @MedellinJS
+# JavaScript y HTML5
 -----------------------------------
 
 Samuel Burbano Ramos
 
-[@iosamuel](http://twitter.com/iosamuel)
+[@iosamuel](https://twitter.com/iosamuel)
 
-[www.samuelbr.com](http://www.samuelbr.com)
+[iosamuel.com](https://iosamuel.com)
 
-[s@samuelbr.com](mailto:s@samuelbr.com)
+[me@iosamuel.com](mailto:me@iosamuel.com)
 
